@@ -38,6 +38,13 @@
             </h3>
           </div>
         </div>
+        <div class="col-md-6">
+            <h3>High Score:
+              <span id="high-score">0</span>
+            </h3>
+          </div>
+        </div>
+        
 
         <!-- Instructions -->
         <div class="row mt-5">
@@ -66,6 +73,8 @@ const currentLevel = levels.medium;
 let time = currentLevel;
 let score = 0;
 let isPlaying;
+let highScore = 0;
+
 // DOM Elements
 const wordInput = document.querySelector('#word-input');
 const currentWord = document.querySelector('#current-word');
@@ -132,7 +141,7 @@ function startMatch() {
 // Match currentWord to wordInput
 function matchWords() {
   if (wordInput.value === currentWord.innerHTML) {
-    message.innerHTML = 'Correct!!!';
+    message.innerHTML = 'Correct!';
     return true;
   } else {
     message.innerHTML = '';
@@ -161,11 +170,22 @@ function countdown() {
 }
 // Check game status
 function checkStatus() {
+  setHighScore();
   if (!isPlaying && time === 0) {
-    message.innerHTML = 'Game Over!!!';
+    message.innerHTML = 'Game Over';
     score = -1;
   }
 }
+//Set the high score
+function setHighScore() {
+    if(score > highScore && time === 0) {
+        highScore = score;
+        document.getElementById("high-score").innerHTML = highScore.toString();
+    } else if (time === 0 && score < highScore) {
+        let score = 0;
+    }
+}
+
 </script>
 
 </body>
